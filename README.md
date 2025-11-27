@@ -1,108 +1,155 @@
-# 🛒 Grocery Sales Analysis
+# 🛒 Grocery Sales Analysis — README
 
-*A Complete Data Cleaning, Merging, and Exploratory Data Analysis (EDA) Project*
+## 📌 Project Overview
 
-## 📌 Overview
+This project explores a large grocery sales dataset using Python and Pandas to uncover insights that help understand product performance, customer behavior, and overall business trends.
 
-This notebook performs a complete end-to-end analysis of a large grocery sales dataset from Kaggle.
-The goal is to understand product performance, customer behavior, category sales trends, and overall business insights.
+The analysis includes:
 
-The notebook covers:
-
-* Dataset loading
-* Efficient sampling (because full dataset > 6M rows)
-* Merging multiple related CSV files
-* Data cleaning and handling missing values
-* Feature engineering
+* Data cleaning
 * Exploratory Data Analysis (EDA)
+* Aggregations and KPIs
 * Visualizations
-* Key insights for business decision-making
+* Business insights
+
+All analysis is performed inside a Kaggle Notebook using a publicly available dataset.
 
 ---
 
-## 📁 Dataset Description
+## 📂 Notebook Link
 
-The original Kaggle dataset contains several relational tables:
+You can view and run the full notebook here:
 
-* **sales.csv** – Transaction-level sales data
-* **products.csv** – Product details
-* **customers.csv** – Customer demographics
-* **categories.csv** – Product categories
-* **cities.csv** – Cities of customers
-* **countries.csv** – Country information
-
-Because the dataset is huge, the notebook includes **sampling** to 100k rows for easier processing on Kaggle.
+👉 **Kaggle Notebook:**
+[https://www.kaggle.com/code/naziruai/grocery-sales-analysis-2](https://www.kaggle.com/code/naziruai/grocery-sales-analysis-2)
 
 ---
 
-## ⚙️ Steps Performed in the Notebook
+# 📦 Dataset
 
-### 1️⃣ Load Datasets
+This project uses the **Grocery Sales Dataset** on Kaggle:
 
-Each CSV file is loaded into a separate DataFrame.
+🔗 **Dataset URL:**
+[https://www.kaggle.com/datasets/andrexibiza/grocery-sales-dataset](https://www.kaggle.com/datasets/andrexibiza/grocery-sales-dataset)
 
-### 2️⃣ Sample the Sales Data
+The dataset contains multiple CSV files:
 
-To avoid RAM crash or long merging time, the notebook samples:
+* `sales.csv`
+* `products.csv`
+* `customers.csv`
+* `categories.csv`
+* `cities.csv`
+* `countries.csv`
 
-```python
-sales_sample = sales.sample(n=100_000, random_state=42)
+---
+
+# ▶️ How to Run This Notebook on Kaggle (Recommended)
+
+Running this project on Kaggle is the easiest method because:
+
+✔️ No installation needed
+✔️ Dataset can be attached automatically
+✔️ Notebook runs in the cloud
+
+### **Steps:**
+
+1. Open the notebook:
+   👉 [https://www.kaggle.com/code/naziruai/grocery-sales-analysis-2](https://www.kaggle.com/code/naziruai/grocery-sales-analysis-2)
+
+2. Click **Copy & Edit** (top-right corner)
+
+3. On the right panel, click **Add Data**
+
+4. Search for this dataset:
+   `grocery-sales-dataset`
+
+5. Select it → Click **Add**
+
+6. Run all cells in the notebook (**Runtime → Run all**)
+
+🎉 **Everything will work automatically — no downloads needed.**
+
+---
+
+# 💻 How to Run Locally (Optional)
+
+If the user wants to run locally instead of Kaggle:
+
+### 1. Clone or download this notebook
+
+### 2. Install dependencies
+
+```
+pip install pandas numpy matplotlib seaborn
 ```
 
-### 3️⃣ Merge All DataFrames
+### 3. Download dataset manually
 
-A full merged dataset is created using:
+From: [https://www.kaggle.com/datasets/andrexibiza/grocery-sales-dataset](https://www.kaggle.com/datasets/andrexibiza/grocery-sales-dataset)
 
-* ProductID → products
-* CustomerID → customers
-* CategoryID → categories
-* CityID → cities
-* CountryID → countries
+Place all CSV files in a `data/` folder.
 
-### 4️⃣ Handle Missing Values
+### 4. Update paths in the notebook
 
-Columns with <2% missing values (e.g., **MiddleInitial**, **SalesDate**) were imputed appropriately using:
+Change lines like:
 
-* Mode for categorical
-* Forward/Backward fill for dates
+```python
+sales = pd.read_csv("/kaggle/input/grocery-sales-dataset/sales.csv")
+```
 
-### 5️⃣ Feature Engineering
+to:
 
-New useful columns:
+```python
+sales = pd.read_csv("data/sales.csv")
+```
 
-* **Total = Quantity × UnitPrice**
-* **Month extracted** from SalesDate
+Run the notebook normally.
 
-### 6️⃣ Exploratory Data Analysis
+---
 
-The notebook analyzes:
+# 🧹 Data Cleaning Performed
 
-* Total revenue
+* Handled missing values in categorical and numeric columns
+* Combined multiple CSV files using efficient merging
+* Created a sampled version of the large dataset for faster analysis
+* Converted date columns to datetime for time-series analysis
+
+---
+
+# 📊 Analysis Performed
+
+* Total sales calculations
 * Best-selling products
-* Most profitable categories
-* Monthly trends
-* Customer purchasing patterns
-
-### 7️⃣ Visualizations
-
-Charts generated include:
-
-* 📈 Monthly Sales Trend (line plot)
-* 📊 Product Sales Ranking (bar chart)
-* 🍞 Category Revenue Comparison
-* 👥 Customer Demographics
+* Best-performing categories
+* Monthly sales trends
+* Customer purchase patterns
+* City & country performance
 
 ---
 
-## 📊 Key Insights
+# 📈 Visualizations
 
-```python
-print("📊 KEY INSIGHTS")
-print("- Total Sales:", merged_df['Total'].sum())
-print("- Best Selling Product:", top_products.index[0])
-print("- Best Category:", category_sales.index[0])
-print("- Month with Highest Sales:", merged_df.groupby('Month')['Total'].sum().idxmax())
-```
+The notebook includes:
+
+* Line chart of monthly sales
+* Bar charts for product and category ranking
+* Customer distribution plots
+* Time-series summaries
+
+All visualizations are generated using Matplotlib and Seaborn.
+
+---
+
+# 🧠 Key Insights
+
+Examples of insights generated:
+
+* **Total Sales:** Computed from `Total` column
+* **Best-Selling Product:** Based on highest revenue
+* **Top Category:** Category with strongest performance
+* **Peak Sales Month:** Determined from grouped monthly totals
+
+---
 
 Summary:
 
@@ -146,3 +193,17 @@ This notebook demonstrates how data analysis can help grocery businesses:
 It serves as a strong portfolio project showing my ability to work with **large datasets**, **data cleaning**, **EDA**, and **visualization**.
 
 feel free to explore the notebook and reach out for any questions or collaborations!
+
+# 📫 Contact
+
+* LinkedIn
+* GitHub
+* Email
+
+---
+
+# 📜 License
+
+MIT License © 2025 NaziruAI
+
+---
